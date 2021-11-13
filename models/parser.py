@@ -112,19 +112,29 @@ class Parser():
                 curr_agen_inst = Agency(curr_index, curr_agen, curr_agen_org)
                 # instantiate expedition instance
                 curr_exped_inst = Expedition(curr_exped, curr_dur)
+                # instantiate astronaut instance
+                curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, 
+                        curr_agen, curr_agen_org)
+                
 
 
                 # append model instances to their respective lists
                 self.agencies.append(curr_agen_inst)
                 self.expeditions.append(curr_exped_inst)
+                self.astronauts.append(curr_astro_inst)
+
         def __str__(self) -> str:
             str = f"List of Agencies:\n"
             agency_str = [i.__str__() for i in self.agencies]
             for i in agency_str:
                     str += i
-            str += f"List of Expeditions:\n"
+            str += f"\nList of Expeditions:"
             expedition_str = [i.__str__() for i in self.expeditions]
             for i in expedition_str:
+                    str += i
+            str += f"\nList of Astronauts:\n"
+            astronaut_str = [i.__str__() for i in self.astronauts]
+            for i in astronaut_str:
                     str += i
             return str
             

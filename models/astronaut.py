@@ -6,3 +6,10 @@ class Astronaut():
                 self.age = age
                 self.agency = agency
                 self.agency_id = agency_id
+        def __str__(self) -> str:
+            str_ret = f"\nAstronautID: {str(self.id)}"
+            str_ret += f"\nName: {self.name}"
+            str_ret += f"\nAge: {self.age}"
+            str_ret += f"\nAgency: {self.agency}"
+            str_ret += f"\nAgencyID: {str(self.agency_id)}"
+            return str_ret
