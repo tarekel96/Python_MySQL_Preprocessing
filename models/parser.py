@@ -1,5 +1,11 @@
-# Python class for parsing the csv data into Python data structures
+# import Python classes that represent the MySQL Tables
+from models.agency import Agency
+from models.expedition import Expedition
+from models.astronaut import Astronaut
+from models.astro_expedition import AstroExpedition
+from models.staging_model import StagingModel
 
+# Python class for parsing the csv data into Python data structures
 class Parser():
         def __init__(self, file_name="expeditionData.csv"):
                 self.temp_file = None
@@ -17,7 +23,6 @@ class Parser():
                         self.temp_file.close()
                 self.temp_file = None
                 # ***** FIELDS *****
-                #  assign file name
                 self.exped_i = None
                 self.astro_i = None
                 self.age_i = None
@@ -27,11 +32,19 @@ class Parser():
                 self.agen_i = None
                 self.agen_org_i = None
                 self.temp_file = None
+
+                # lists that store the instances of the tables
+                self.agencies = []
+                self.expeditions = []
+                self.astronauts = []
+                self.astro_expeds = []
+
         # assigns column/attribute indexes from the csv file
         def assign_indexes(self):
                 with open(self.file_name, 'r') as file:
                         first_line_list = file.readline().strip().split(",")
-                        for name, index in enumerate(first_line_list):
+                        print(first_line_list)
+                        for index, name in enumerate(first_line_list):
                                 if name == "Expedition":
                                         self.exped_i = index
                                 elif name == "Astronaut":
@@ -53,7 +66,65 @@ class Parser():
         # ***** METHODS *****
         def process_file(self):
                 with open(self.file_name, 'r') as file:
-                        for curr_line in file:
+                        # next skips the first line
+                        next(file)
+                        for index, curr_line in enumerate(file):
                                 # list of values from csv file
                                 curr_line_list = curr_line.strip().split(",")
                                 print(curr_line_list)
+                                self.process_curr_list(curr_line_list, index)
+        
+        def process_curr_list(self, curr_line_list, curr_index):
+                # declare curr attr vars
+                curr_exped = None
+                curr_astro = None
+                curr_age = None
+                curr_gend = None
+                curr_nat = None
+                curr_dur = None
+                curr_agen = None
+                curr_agen_org = None
+
+                for index, val in enumerate(curr_line_list):
+                        # assign curr attr values
+                        if index == self.exped_i:
+                                curr_exped = val
+                        elif index == self.astro_i:
+                                curr_astro = val
+                        elif index == self.age_i:
+                                curr_age = val
+                        elif index == self.gend_i:
+                                curr_gend = val
+                        elif index == self.nat_i:
+                                curr_nat = val
+                        elif index == self.dur_i:
+                                curr_dur = val
+                        elif index == self.agen_i:
+                                curr_agen = val
+                        elif index == self.agen_org_i:
+                                curr_agen_org = val
+                        else:
+                                pass
+                        
+                # ***** Create Model Instances *****
+
+                # instantiate expedition instance
+                curr_agen_inst = Agency(curr_index, curr_agen, curr_agen_org)
+                # instantiate expedition instance
+                curr_exped_inst = Expedition(curr_exped, curr_dur)
+
+
+                # append model instances to their respective lists
+                self.agencies.append(curr_agen_inst)
+                self.expeditions.append(curr_exped_inst)
+        def __str__(self) -> str:
+            str = f"List of Agencies:\n"
+            agency_str = [i.__str__() for i in self.agencies]
+            for i in agency_str:
+                    str += i
+            str += f"List of Expeditions:\n"
+            expedition_str = [i.__str__() for i in self.expeditions]
+            for i in expedition_str:
+                    str += i
+            return str
+            

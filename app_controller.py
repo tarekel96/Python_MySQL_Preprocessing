@@ -6,6 +6,7 @@ def main():
         parser = Parser(file_name="expeditionData.csv")
         parser.assign_indexes()
         parser.process_file()
+        print(parser.__str__())
 main()
 # if __name__ == main:
 #         main()
