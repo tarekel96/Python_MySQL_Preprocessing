@@ -4,6 +4,6 @@ class Expedition():
                 self.id = id
                 self.duration = duration
         def __str__(self) -> str:
-            str_ret = f"\nExpeditionID: {str(self.id)}"
-            str_ret += f"\nDuration: {self.duration}"
+            str_ret = f"\nExpdition:\nExpeditionID: {str(self.id)}"
+            str_ret += f"\nDuration: {self.duration}\n"
             return str_ret

@@ -115,6 +115,9 @@ class Parser():
                 # instantiate astronaut instance
                 curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, 
                         curr_agen, curr_agen_org)
+                # instantiate astronaut instance
+                curr_astro_exped_inst = AstroExpedition(curr_index, None, None, 
+                        curr_exped, curr_index)
                 
 
 
@@ -122,19 +125,24 @@ class Parser():
                 self.agencies.append(curr_agen_inst)
                 self.expeditions.append(curr_exped_inst)
                 self.astronauts.append(curr_astro_inst)
+                self.astro_expeds.append(curr_astro_exped_inst)
 
         def __str__(self) -> str:
-            str = f"List of Agencies:\n"
+            str = f"**********List of Agencies:**********\n"
             agency_str = [i.__str__() for i in self.agencies]
             for i in agency_str:
                     str += i
-            str += f"\nList of Expeditions:"
+            str += f"\n**********List of Expeditions:**********\n"
             expedition_str = [i.__str__() for i in self.expeditions]
             for i in expedition_str:
                     str += i
-            str += f"\nList of Astronauts:\n"
+            str += f"\n**********List of Astronauts:**********\n"
             astronaut_str = [i.__str__() for i in self.astronauts]
             for i in astronaut_str:
+                    str += i
+            str += f"\n**********List of AstroExpeditions:**********\n"
+            astro_exp_str = [i.__str__() for i in self.astro_expeds]
+            for i in astro_exp_str:
                     str += i
             return str
             
