@@ -73,6 +73,8 @@ class Parser():
                                 curr_line_list = curr_line.strip().split(",")
                                 print(curr_line_list)
                                 self.process_curr_list(curr_line_list, index)
+                        # assign missing Astronaut and Expedition of each AstroExpedition
+                        self.process_astr_exp()
         
         def process_curr_list(self, curr_line_list, curr_index):
                 # declare curr attr vars
@@ -118,14 +120,31 @@ class Parser():
                 # instantiate astronaut instance
                 curr_astro_exped_inst = AstroExpedition(curr_index, None, None, 
                         curr_exped, curr_index)
-                
-
 
                 # append model instances to their respective lists
                 self.agencies.append(curr_agen_inst)
                 self.expeditions.append(curr_exped_inst)
                 self.astronauts.append(curr_astro_inst)
                 self.astro_expeds.append(curr_astro_exped_inst)
+
+        # each AstroExpedition in the list is missing its respective Astronaut and Expedition
+        def process_astr_exp(self):
+                for index, curr_astro_exped in enumerate(self.astro_expeds):
+                              astronaut = self.get_astro_by_id(curr_astro_exped.astronaut_id)
+                              curr_astro_exped.astronaut = astronaut
+                              expedition = self.get_exped_by_id(curr_astro_exped.expedition_id)
+                              curr_astro_exped.expedition = expedition
+                              
+
+        def get_astro_by_id(self, astro_id):
+                for curr_astro in self.astronauts:
+                        if curr_astro.id == astro_id:
+                                return curr_astro
+
+        def get_exped_by_id(self, exped_id):
+                for curr_exped in self.expeditions:
+                        if curr_exped.id == exped_id:
+                                return curr_exped
 
         def __str__(self) -> str:
             str = f"**********List of Agencies:**********\n"
