@@ -73,8 +73,6 @@ class Parser():
                                 curr_line_list = curr_line.strip().split(",")
                                 print(curr_line_list)
                                 self.process_curr_list(curr_line_list, index)
-                        # assign missing Astronaut and Expedition of each AstroExpedition
-                        self.process_astr_exp()
         
         def process_curr_list(self, curr_line_list, curr_index):
                 # declare curr attr vars
@@ -135,16 +133,26 @@ class Parser():
                               expedition = self.get_exped_by_id(curr_astro_exped.expedition_id)
                               curr_astro_exped.expedition = expedition
                               
-
+        # given an astro id, return astronaut
         def get_astro_by_id(self, astro_id):
                 for curr_astro in self.astronauts:
                         if curr_astro.id == astro_id:
                                 return curr_astro
 
+        # given an exped id, return expedition
         def get_exped_by_id(self, exped_id):
                 for curr_exped in self.expeditions:
                         if curr_exped.id == exped_id:
                                 return curr_exped
+
+        # invokes all process methods
+        def process(self):
+                # assign col fields their respective col indexes
+                self.assign_indexes()
+                # get and assign data from .csv file
+                self.process_file()         
+                # assign missing Astronaut and Expedition of each AstroExpedition
+                self.process_astr_exp() 
 
         def __str__(self) -> str:
             str = f"**********List of Agencies:**********\n"
