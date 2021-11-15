@@ -66,6 +66,43 @@ class Parser():
                                 else:
                                         pass
         # ***** METHODS *****
+                # ***** METHODS *****
+        def process_agency(self):
+                with open(self.file_name, 'r') as file:
+                        # next skips the first line
+                        next(file)
+                        for index, curr_agency_line in enumerate(file, start=1):
+                                # list of values from csv file
+                                curr_agency_line_list = curr_agency_line.strip().split(",")
+                                # print(curr_agency_line_list)
+                                self.process_agency_list(curr_agency_line_list)
+
+        def process_agency_list(self, curr_line_list):
+                # declare curr attr vars
+                curr_agen = None
+                curr_agen_org = None
+
+                for index, val in enumerate(curr_line_list):
+                        # assign curr attr values
+                        if index == self.agen_i:
+                                curr_agen = val
+                        elif index == self.agen_org_i:
+                                curr_agen_org = val
+                        else:
+                                pass
+                        
+                # ***** Create Agency Instances *****
+                curr_agen_inst = Agency(None, curr_agen, curr_agen_org)
+
+                # append model instances to their respective lists
+                if db_helper.is_duplicate(curr_agen_inst.name, curr_agen_inst.origin, self.agencies) == False:
+                        self.agencies.append(curr_agen_inst)
+        
+        # given a list of agency ids, assign it to agency instance
+        def assign_agency_ids(self, agency_ids):
+                for index, curr_id in enumerate(agency_ids):
+                        self.agencies[index].set_id(curr_id)
+
         def process_file(self):
                 with open(self.file_name, 'r') as file:
                         # next skips the first line
@@ -111,23 +148,24 @@ class Parser():
                 # ***** Create Model Instances *****
 
                 # instantiate expedition instance
-                curr_agen_inst = Agency(curr_index, curr_agen, curr_agen_org)
+                # curr_agen_inst = Agency(curr_index, curr_agen, curr_agen_org)
+                curr_agen_inst = Agency(None, curr_agen, curr_agen_org)
                 # instantiate expedition instance
-                curr_exped_inst = Expedition(curr_exped, curr_dur)
+                # curr_exped_inst = Expedition(curr_exped, curr_dur)
                 # instantiate astronaut instance
-                curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, curr_index)
-                # instantiate astronaut instance
-                curr_astro_exped_inst = AstroExpedition(curr_index, curr_exped, curr_index)
+                # curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, curr_index)
+                # # instantiate astronaut instance
+                # curr_astro_exped_inst = AstroExpedition(curr_index, curr_exped, curr_index)
 
                 # append model instances to their respective lists
                 if db_helper.is_duplicate(curr_agen_inst.id, self.agencies) == False:
                         self.agencies.append(curr_agen_inst)
-                if db_helper.is_duplicate(curr_exped_inst.id, self.expeditions) == False:
-                        self.expeditions.append(curr_exped_inst)
-                if db_helper.is_duplicate(curr_astro_inst.id, self.astronauts) == False:
-                        self.astronauts.append(curr_astro_inst)
-                if db_helper.is_duplicate(curr_astro_exped_inst.id, self.astro_expeds) == False:
-                        self.astro_expeds.append(curr_astro_exped_inst)
+                # if db_helper.is_duplicate(curr_exped_inst.id, self.expeditions) == False:
+                #         self.expeditions.append(curr_exped_inst)
+                # if db_helper.is_duplicate(curr_astro_inst.id, self.astronauts) == False:
+                #         self.astronauts.append(curr_astro_inst)
+                # if db_helper.is_duplicate(curr_astro_exped_inst.id, self.astro_expeds) == False:
+                #         self.astro_expeds.append(curr_astro_exped_inst)
 
         # each AstroExpedition in the list is missing its respective Astronaut and Expedition
         def process_astr_exp(self):
@@ -148,6 +186,13 @@ class Parser():
                 for curr_exped in self.expeditions:
                         if curr_exped.id == exped_id:
                                 return curr_exped
+
+        # invokes all process methods
+        def pre_process(self):
+                # assign col fields their respective col indexes
+                self.assign_indexes()
+                # get and assign agency data from .csv file
+                self.process_agency()
 
         # invokes all process methods
         def process(self):

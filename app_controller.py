@@ -4,11 +4,18 @@ from queries import QUERIES
 
 def main():
         db = DB_Model()
-        # create tables
-        
-
         parser = Parser(file_name="expeditionData.csv")
-        parser.process()
+        parser.pre_process()
+        # insert agency before creating any other table
+        db.assign_table_recs(parser.agencies, "agency")
+        print(db.records["agency"])
+        # fetch agency IDs and update parser agency list
+        agency_ids = db.get_records(QUERIES["GET_AGENCY_ID"])
+        parser.assign_agency_ids(agency_ids)
+        db.assign_table_recs(parser.agencies, "agency")
+        print(db.records["agency"])
+
+        # parser.process()
         # db.assign_table_recs(parser.agencies, "agency")
         # print(db.records['agency'])
         # db.assign_table_recs(parser.expeditions, "expedition")

@@ -35,8 +35,8 @@ QUERIES = {
                         ''',
         "INSERT_AGENCY": '''
                         INSERT INTO agency 
-                        (agencyID, Name, Origin)
-                        VALUES (%s, %s, %s)
+                        (Name, Origin)
+                        VALUES (%s, %s)
                         ''',
         "INSERT_EXPEDITION": '''
                         INSERT INTO expedition 
@@ -50,8 +50,8 @@ QUERIES = {
                         ''',
         "INSERT_ASTRO_EXPED": '''
                         INSERT INTO astro_expedition 
-                        (ID, Expedition, Astronaut)
-                        VALUES (%s, %s, %s)
+                        (Expedition, Astronaut)
+                        VALUES (%s, %s)
                         ''',
         "GET_AGENCY_ID": '''
                         SELECT agencyID

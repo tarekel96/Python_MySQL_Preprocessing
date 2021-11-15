@@ -19,3 +19,10 @@ class db_helper():
                         if m.id == pk:
                                 return True
                 return False
+        
+        @staticmethod
+        def is_duplicate(name, origin, models) -> bool:
+                for m in models:
+                        if m.name == name and m.origin == origin:
+                                return True
+                return False

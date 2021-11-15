@@ -39,11 +39,13 @@ class DB_Model():
                 table_name = str(table_name)
                 self.records[table_name] = db_helper.get_record_list(model_list)
 
-        # function to execute a single query with no payload
-        def single_query(self,query):
+        # function to execute fetch records
+        def get_records(self,query):
                 try:
                         self.cursor.execute(query)
-                        self.connection.commit()
+                        results = self.cursor.fetchall()
+                        results = [i[0] for i in results]
+                        return results
                 except Exception as err:
                         print(f"Error: An error occurred in trying execute a single query.\n{err}")
 

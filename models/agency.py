@@ -5,7 +5,12 @@ class Agency():
                 self.name = name
                 self.origin = origin
 
+        def set_id(self, id):
+                self.id = id
+
         def get_fields(self):
+                if self.id == None:
+                        return tuple([self.name, self.origin])
                 return tuple([self.id, self.name, self.origin])
 
         def __str__(self) -> str:
