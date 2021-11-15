@@ -1,6 +1,6 @@
 import mysql.connector
 import os
-from db_helper import db_helper
+from controllers.db_helper import db_helper
 from queries import QUERIES
 # Gets the MySQL DB credentials from a .env file
 from dotenv import load_dotenv

@@ -5,7 +5,7 @@ from models.astronaut import Astronaut
 from models.astro_expedition import AstroExpedition
 from models.staging_model import StagingModel
 # import helper
-from db_helper import db_helper
+from controllers.db_helper import db_helper
 
 # Python class for parsing the csv data into Python data structures
 class Parser():
@@ -200,9 +200,7 @@ class Parser():
                 # assign col fields their respective col indexes
                 self.assign_indexes()
                 # get and assign data from .csv file
-                self.process_file()         
-                # assign missing Astronaut and Expedition of each AstroExpedition
-                # self.process_astr_exp() 
+                self.process_file()
 
         def __str__(self) -> str:
             str = f"**********List of Agencies:**********\n"
