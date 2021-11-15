@@ -21,7 +21,7 @@ class db_helper():
                 return False
         
         @staticmethod
-        def is_duplicate(name, origin, models) -> bool:
+        def is_duplicate_agency(name, origin, models) -> bool:
                 for m in models:
                         if m.name == name and m.origin == origin:
                                 return True

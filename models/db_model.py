@@ -34,6 +34,15 @@ class DB_Model():
                         # print("Tables have been created.")
                 except mysql.connector.Error as err:
                         print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: localhost and user: root.")
+        
+        # function to execute a single query with no payload
+        def single_query(self,query):
+                try:
+                        self.cursor.execute(query)
+                        self.connection.commit()
+                except Exception as err:
+                        print(f"Error: An error occurred in trying execute a single query.\n{err}")
+        
         # assigns list of tuples to respective key of self.records dict
         def assign_table_recs(self, model_list, table_name):
                 table_name = str(table_name)

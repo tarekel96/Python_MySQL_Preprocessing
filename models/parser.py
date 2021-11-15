@@ -95,7 +95,7 @@ class Parser():
                 curr_agen_inst = Agency(None, curr_agen, curr_agen_org)
 
                 # append model instances to their respective lists
-                if db_helper.is_duplicate(curr_agen_inst.name, curr_agen_inst.origin, self.agencies) == False:
+                if db_helper.is_duplicate_agency(curr_agen_inst.name, curr_agen_inst.origin, self.agencies) == False:
                         self.agencies.append(curr_agen_inst)
         
         # given a list of agency ids, assign it to agency instance
@@ -146,22 +146,16 @@ class Parser():
                                 pass
                         
                 # ***** Create Model Instances *****
-
                 # instantiate expedition instance
-                # curr_agen_inst = Agency(curr_index, curr_agen, curr_agen_org)
-                curr_agen_inst = Agency(None, curr_agen, curr_agen_org)
-                # instantiate expedition instance
-                # curr_exped_inst = Expedition(curr_exped, curr_dur)
+                curr_exped_inst = Expedition(curr_exped, curr_dur)
                 # instantiate astronaut instance
-                # curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, curr_index)
-                # # instantiate astronaut instance
-                # curr_astro_exped_inst = AstroExpedition(curr_index, curr_exped, curr_index)
+                # curr_astro_inst = Astronaut(None, curr_astro, curr_age, curr_index)
+                # instantiate astronaut instance
+                # curr_astro_exped_inst = AstroExpedition(None, curr_exped, curr_index)
 
                 # append model instances to their respective lists
-                if db_helper.is_duplicate(curr_agen_inst.id, self.agencies) == False:
-                        self.agencies.append(curr_agen_inst)
-                # if db_helper.is_duplicate(curr_exped_inst.id, self.expeditions) == False:
-                #         self.expeditions.append(curr_exped_inst)
+                if db_helper.is_duplicate(curr_exped_inst.id, self.expeditions) == False:
+                        self.expeditions.append(curr_exped_inst)
                 # if db_helper.is_duplicate(curr_astro_inst.id, self.astronauts) == False:
                 #         self.astronauts.append(curr_astro_inst)
                 # if db_helper.is_duplicate(curr_astro_exped_inst.id, self.astro_expeds) == False:
