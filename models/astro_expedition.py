@@ -7,6 +7,9 @@ class AstroExpedition():
                 self.expedition_id = expedition_id
                 self.astronaut_id = astronaut_id
         
+        def set_id(self, id):
+                self.id = id
+        
         # do not include the last 2 fields bc they are constraints in the sql table
         def get_fields(self):
                 return tuple([self.id, self.expedition_id, self.astronaut_id])

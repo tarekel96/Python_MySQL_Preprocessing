@@ -26,12 +26,12 @@ class DB_Model():
                         )
                         self.cursor = self.connection.cursor()
                         print("Connection made.")
-                        # print("Creating tables...")
-                        # self.single_query(QUERIES["CREATE_AGENCY"])
-                        # self.single_query(QUERIES["CREATE_EXPEDITION"])
-                        # self.single_query(QUERIES["CREATE_ASTRONAUT"])
-                        # self.single_query(QUERIES["CREATE_ASTRO_EXPED"])
-                        # print("Tables have been created.")
+                        print("Creating tables...")
+                        self.single_query(QUERIES["CREATE_AGENCY"])
+                        self.single_query(QUERIES["CREATE_EXPEDITION"])
+                        self.single_query(QUERIES["CREATE_ASTRONAUT"])
+                        self.single_query(QUERIES["CREATE_ASTRO_EXPED"])
+                        print("Tables have been created.")
                 except mysql.connector.Error as err:
                         print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: localhost and user: root.")
         

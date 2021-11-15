@@ -103,6 +103,11 @@ class Parser():
                 for index, curr_id in enumerate(agency_ids):
                         self.agencies[index].set_id(curr_id)
 
+        # given a list of agency ids, assign it to agency instance
+        def assign_astronaut_ids(self, astronaut_ids):
+                for index, curr_id in enumerate(astronaut_ids):
+                        self.astronauts[index].set_id(curr_id)
+
         def process_file(self):
                 with open(self.file_name, 'r') as file:
                         # next skips the first line
@@ -149,17 +154,19 @@ class Parser():
                 # instantiate expedition instance
                 curr_exped_inst = Expedition(curr_exped, curr_dur)
                 # instantiate astronaut instance
-                # curr_astro_inst = Astronaut(None, curr_astro, curr_age, curr_index)
-                # instantiate astronaut instance
-                # curr_astro_exped_inst = AstroExpedition(None, curr_exped, curr_index)
-
+                curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, 
+                        db_helper.get_agency_id(curr_agen, curr_agen_org, self.agencies))
+                curr_astro_exped_inst = AstroExpedition(curr_index, curr_exped, curr_index)
+                
                 # append model instances to their respective lists
                 if db_helper.is_duplicate(curr_exped_inst.id, self.expeditions) == False:
                         self.expeditions.append(curr_exped_inst)
-                # if db_helper.is_duplicate(curr_astro_inst.id, self.astronauts) == False:
-                #         self.astronauts.append(curr_astro_inst)
-                # if db_helper.is_duplicate(curr_astro_exped_inst.id, self.astro_expeds) == False:
-                #         self.astro_expeds.append(curr_astro_exped_inst)
+                if db_helper.is_duplicate_astronaut(curr_astro_inst.name, curr_astro_inst.age, 
+                        curr_astro_inst.agency_id, self.astronauts) == False:
+                        self.astronauts.append(curr_astro_inst)
+                if db_helper.is_duplicate_astro_exped(curr_astro_exped_inst.expedition_id, 
+                        curr_astro_exped_inst.astronaut_id, self.astro_expeds) == False:
+                        self.astro_expeds.append(curr_astro_exped_inst)
 
         # each AstroExpedition in the list is missing its respective Astronaut and Expedition
         def process_astr_exp(self):

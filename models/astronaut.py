@@ -5,10 +5,16 @@ class Astronaut():
                 self.name = name
                 self.age = age
                 self.agency_id = agency_id
+        
+        def set_id(self, id):
+                self.id = id
 
         def get_fields(self):
+                if self.id == None:
+                        return tuple([self.name, self.age, 
+                                self.agency_id])
                 return tuple([self.id, self.name, self.age, 
-                self.agency_id])
+                        self.agency_id])
 
         def __str__(self) -> str:
                 str_ret = f"\nAstronaut:\nAstronautID: {str(self.id)}"

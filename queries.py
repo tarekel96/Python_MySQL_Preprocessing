@@ -16,7 +16,7 @@ QUERIES = {
         "CREATE_ASTRONAUT": 
                         '''
                         CREATE TABLE astronaut(
-                        astronautID INTEGER NOT NULL PRIMARY KEY,
+                        astronautID INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
                         Name VARCHAR(50),
                         Age INTEGER,
                         Agency INTEGER NOT NULL,
@@ -33,29 +33,44 @@ QUERIES = {
                         CONSTRAINT FK_astro_expedition_astro FOREIGN KEY (Astronaut) REFERENCES astronaut(astronautID)
                         );
                         ''',
-        "INSERT_AGENCY": '''
+        "INSERT_AGENCY":
+                        '''
                         INSERT INTO agency 
                         (Name, Origin)
                         VALUES (%s, %s)
                         ''',
-        "INSERT_EXPEDITION": '''
+        "INSERT_EXPEDITION":
+                        '''
                         INSERT INTO expedition 
                         (expeditionNumber, Duration)
                         VALUES (%s, %s)
                         ''',
-        "INSERT_ASTRONAUT": '''
+        "INSERT_ASTRONAUT":
+                        '''
                         INSERT INTO astronaut 
                         (astronautID, Name, Age, Agency)
                         VALUES (%s, %s, %s, %s)
                         ''',
-        "INSERT_ASTRO_EXPED": '''
+        "INSERT_ASTRO_EXPED":
+                        '''
                         INSERT INTO astro_expedition 
-                        (Expedition, Astronaut)
-                        VALUES (%s, %s)
+                        (ID, Expedition, Astronaut)
+                        VALUES (%s, %s, %s)
                         ''',
-        "GET_AGENCY_ID": '''
+        "GET_AGENCY_ID":
+                        '''
                         SELECT agencyID
                         FROM agency;
+                        ''',
+        "GET_ASTRONAUT_ID": 
+                        '''
+                        SELECT astronautID
+                        FROM agency;
+                        ''',
+        "GET_ASTRO_EXPED_ID": 
+                        '''
+                        SELECT ID
+                        FROM astro_expedition;
                         '''
 }
 
