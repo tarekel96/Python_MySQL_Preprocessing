@@ -70,7 +70,7 @@ class Parser():
                 with open(self.file_name, 'r') as file:
                         # next skips the first line
                         next(file)
-                        for index, curr_line in enumerate(file):
+                        for index, curr_line in enumerate(file, start=1):
                                 # list of values from csv file
                                 curr_line_list = curr_line.strip().split(",")
                                 # print(curr_line_list)
