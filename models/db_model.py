@@ -26,15 +26,27 @@ class DB_Model():
                         )
                         self.cursor = self.connection.cursor()
                         print("Connection made.")
-                        print("Creating tables...")
-                        self.single_query(QUERIES["CREATE_AGENCY"])
-                        self.single_query(QUERIES["CREATE_EXPEDITION"])
-                        self.single_query(QUERIES["CREATE_ASTRONAUT"])
-                        self.single_query(QUERIES["CREATE_ASTRO_EXPED"])
-                        print("Tables have been created.")
+                        self.check_tables()
+                        self.create_tables()
                 except mysql.connector.Error as err:
                         print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: localhost and user: root.")
         
+        # if the tables exist, they will be dropped
+        def check_tables(self):
+                self.single_query(QUERIES["CHECK_ASTRO_EXPED"])
+                self.single_query(QUERIES["CHECK_ASTRONAUT"])
+                self.single_query(QUERIES["CHECK_EXPEDITION"])
+                self.single_query(QUERIES["CHECK_AGENCY"])
+
+        # creates all of the tables
+        def create_tables(self):
+                print("Creating tables...")
+                self.single_query(QUERIES["CREATE_AGENCY"])
+                self.single_query(QUERIES["CREATE_EXPEDITION"])
+                self.single_query(QUERIES["CREATE_ASTRONAUT"])
+                self.single_query(QUERIES["CREATE_ASTRO_EXPED"])
+                print("Tables have been created.")
+
         # function to execute a single query with no payload
         def single_query(self,query):
                 try:

@@ -1,4 +1,22 @@
 QUERIES = {
+        "CHECK_AGENCY": '''
+                        DROP TABLE IF EXISTS agency;
+                        '''
+        ,
+        "CHECK_EXPEDITION": '''
+                        DROP TABLE IF EXISTS expedition;
+                        '''
+        ,
+        "CHECK_ASTRONAUT": 
+                        '''
+                        DROP TABLE IF EXISTS astronaut;
+                        '''
+        ,
+        "CHECK_ASTRO_EXPED": 
+                        '''
+                        DROP TABLE IF EXISTS astro_expedition;
+                        '''
+        ,
         "CREATE_AGENCY": '''
                         CREATE TABLE agency(
                         agencyID INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -73,7 +91,3 @@ QUERIES = {
                         FROM astro_expedition;
                         '''
 }
-
-# INSERT_AGENCY = '''INSERT INTO agency 
-# (agencyID, Name, Origin)
-# VALUES (%s, %s, %s)'''
