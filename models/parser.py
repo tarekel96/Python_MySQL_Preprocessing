@@ -4,6 +4,8 @@ from models.expedition import Expedition
 from models.astronaut import Astronaut
 from models.astro_expedition import AstroExpedition
 from models.staging_model import StagingModel
+# import helper
+from db_helper import db_helper
 
 # Python class for parsing the csv data into Python data structures
 class Parser():
@@ -88,17 +90,17 @@ class Parser():
                 for index, val in enumerate(curr_line_list):
                         # assign curr attr values
                         if index == self.exped_i:
-                                curr_exped = val
+                                curr_exped = int(val)
                         elif index == self.astro_i:
                                 curr_astro = val
                         elif index == self.age_i:
-                                curr_age = val
+                                curr_age = int(val)
                         elif index == self.gend_i:
                                 curr_gend = val
                         elif index == self.nat_i:
                                 curr_nat = val
                         elif index == self.dur_i:
-                                curr_dur = val
+                                curr_dur = int(val)
                         elif index == self.agen_i:
                                 curr_agen = val
                         elif index == self.agen_org_i:
@@ -120,10 +122,14 @@ class Parser():
                         curr_exped, curr_index)
 
                 # append model instances to their respective lists
-                self.agencies.append(curr_agen_inst)
-                self.expeditions.append(curr_exped_inst)
-                self.astronauts.append(curr_astro_inst)
-                self.astro_expeds.append(curr_astro_exped_inst)
+                if db_helper.is_duplicate(curr_agen_inst.id, self.agencies) == False:
+                        self.agencies.append(curr_agen_inst)
+                if db_helper.is_duplicate(curr_exped_inst.id, self.expeditions) == False:
+                        self.expeditions.append(curr_exped_inst)
+                if db_helper.is_duplicate(curr_astro_inst.id, self.astronauts) == False:
+                        self.astronauts.append(curr_astro_inst)
+                if db_helper.is_duplicate(curr_astro_exped_inst.id, self.astro_expeds) == False:
+                        self.astro_expeds.append(curr_astro_exped_inst)
 
         # each AstroExpedition in the list is missing its respective Astronaut and Expedition
         def process_astr_exp(self):

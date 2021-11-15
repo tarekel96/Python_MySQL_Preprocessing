@@ -1,3 +1,6 @@
+from os import stat
+
+
 # helper class for preparing data for db operations
 class db_helper():
         
@@ -9,3 +12,10 @@ class db_helper():
                 for m in models:
                         rec_list.append(m.get_fields())
                 return rec_list
+        
+        @staticmethod
+        def is_duplicate(pk, models) -> bool:
+                for m in models:
+                        if m.id == pk:
+                                return True
+                return False
