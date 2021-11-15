@@ -19,10 +19,10 @@ class DB_Model():
                 try:
                         self.connection = mysql.connector.connect(
                                 # the IP Address of GCP MySQL Instance
-                                host=os.getenv('hostname'),
-                                user="rao",
-                                password="password1",
-                                database="cpsc408",
+                                host=os.getenv("hostname"),
+                                user=os.getenv("user"),
+                                password=os.getenv("password"),
+                                database=os.getenv("database"),
                                 port=3306
                         )
                         self.cursor = self.connection.cursor()
