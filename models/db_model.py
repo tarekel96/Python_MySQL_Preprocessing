@@ -19,17 +19,18 @@ class DB_Model():
                 try:
                         self.connection = mysql.connector.connect(
                                 # the IP Address of GCP MySQL Instance
-                                host="localhost",
-                                user="root",
-                                password=os.getenv('password') ,
-                                database="cpsc408"
+                                host=os.getenv('hostname'),
+                                user="rao",
+                                password="password1",
+                                database="cpsc408",
+                                port=3306
                         )
                         self.cursor = self.connection.cursor()
                         print("Connection made.")
                         self.check_tables()
                         self.create_tables()
                 except mysql.connector.Error as err:
-                        print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: localhost and user: root.")
+                        print(f"Error: Unable to connect to MySQL.\nPlease re-renter the password for host: {os.getenv('hostname')} and user: root.")
         
         # if the tables exist, they will be dropped
         def check_tables(self):
