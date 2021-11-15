@@ -45,7 +45,7 @@ class Parser():
         def assign_indexes(self):
                 with open(self.file_name, 'r') as file:
                         first_line_list = file.readline().strip().split(",")
-                        print(first_line_list)
+                        # print(first_line_list)
                         for index, name in enumerate(first_line_list):
                                 if name == "Expedition":
                                         self.exped_i = index
@@ -73,7 +73,7 @@ class Parser():
                         for index, curr_line in enumerate(file):
                                 # list of values from csv file
                                 curr_line_list = curr_line.strip().split(",")
-                                print(curr_line_list)
+                                # print(curr_line_list)
                                 self.process_curr_list(curr_line_list, index)
         
         def process_curr_list(self, curr_line_list, curr_index):
@@ -115,8 +115,7 @@ class Parser():
                 # instantiate expedition instance
                 curr_exped_inst = Expedition(curr_exped, curr_dur)
                 # instantiate astronaut instance
-                curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, 
-                        curr_agen, curr_agen_org)
+                curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, curr_index)
                 # instantiate astronaut instance
                 curr_astro_exped_inst = AstroExpedition(curr_index, None, None, 
                         curr_exped, curr_index)

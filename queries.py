@@ -8,6 +8,11 @@ QUERIES = {
                         INSERT INTO expedition 
                         (expeditionNumber, Duration)
                         VALUES (%s, %s)
+                        ''',
+        "INSERT_ASTRONAUT": '''
+                        INSERT INTO astronaut 
+                        (astronautID, Name, Age, Agency)
+                        VALUES (%s, %s, %s, %s)
                         '''
 }
 
