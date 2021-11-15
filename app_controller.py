@@ -11,9 +11,10 @@ def main():
         db.assign_table_recs(parser.expeditions, "expedition")
         # print(db.records['expedition'])
         db.assign_table_recs(parser.astronauts, "astronaut")
-        print(db.records['astronaut'])
-        db.assign_table_recs(parser.astro_expeds, "astro_exped")
-        # print(db.records['astro_exped'])
+        # print(db.records['astronaut'])
+        # print(parser.astro_expeds)
+        db.assign_table_recs(parser.astro_expeds, "astro_expedition")
+        # print(db.records['astro_expedition'])
         
         # print(parser.__str__())
         
@@ -23,6 +24,8 @@ def main():
         # db.bulk_insert(QUERIES['INSERT_AGENCY'], db.records['agency'])
         # db.bulk_insert(QUERIES['INSERT_EXPEDITION'], db.records['expedition'])
         # db.bulk_insert(QUERIES['INSERT_ASTRONAUT'], db.records['astronaut'])
+        db.bulk_insert(QUERIES['INSERT_ASTRO_EXPED'], db.records['astro_expedition'])
+
 main()
 # if __name__ == main:
 #         main()

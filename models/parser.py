@@ -117,8 +117,7 @@ class Parser():
                 # instantiate astronaut instance
                 curr_astro_inst = Astronaut(curr_index, curr_astro, curr_age, curr_index)
                 # instantiate astronaut instance
-                curr_astro_exped_inst = AstroExpedition(curr_index, None, None, 
-                        curr_exped, curr_index)
+                curr_astro_exped_inst = AstroExpedition(curr_index, curr_exped, curr_index)
 
                 # append model instances to their respective lists
                 if db_helper.is_duplicate(curr_agen_inst.id, self.agencies) == False:
@@ -157,7 +156,7 @@ class Parser():
                 # get and assign data from .csv file
                 self.process_file()         
                 # assign missing Astronaut and Expedition of each AstroExpedition
-                self.process_astr_exp() 
+                # self.process_astr_exp() 
 
         def __str__(self) -> str:
             str = f"**********List of Agencies:**********\n"

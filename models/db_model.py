@@ -13,7 +13,7 @@ class DB_Model():
                         "agency": None,
                         "expedition": None,
                         "astronaut": None,
-                        "astro_exped": None
+                        "astro_expedition": None
                 }
                 try:
                         self.connection = mysql.connector.connect(
